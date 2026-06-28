@@ -431,18 +431,11 @@ function About() {
         </div>
 
         <div ref={ref} className="grid grid-cols-2 gap-4">
-          {stats.map((s, i) => {
-            const v = useCount(s.v, inView);
-            return (
-              <Reveal key={s.label} delay={i * 0.08}>
-                <div className="rounded-3xl glass p-7 h-full">
-                  <div className="text-5xl font-light text-gold-gradient tabular-nums">{v}{s.suffix}</div>
-                  <div className="mt-3 h-px hairline" />
-                  <div className="mt-3 text-xs uppercase tracking-[0.2em] text-muted-foreground">{s.label}</div>
-                </div>
-              </Reveal>
-            );
-          })}
+          {stats.map((s, i) => (
+            <Reveal key={s.label} delay={i * 0.08}>
+              <StatCard target={s.v} suffix={s.suffix} label={s.label} start={inView} />
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
