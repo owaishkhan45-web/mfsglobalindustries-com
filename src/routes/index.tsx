@@ -385,6 +385,17 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
+function StatCard({ target, suffix, label, start }: { target: number; suffix: string; label: string; start: boolean }) {
+  const v = useCount(target, start);
+  return (
+    <div className="rounded-3xl glass p-7 h-full">
+      <div className="text-5xl font-light text-gold-gradient tabular-nums">{v}{suffix}</div>
+      <div className="mt-3 h-px hairline" />
+      <div className="mt-3 text-xs uppercase tracking-[0.2em] text-muted-foreground">{label}</div>
+    </div>
+  );
+}
+
 function About() {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
