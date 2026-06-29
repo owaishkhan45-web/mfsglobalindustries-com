@@ -317,26 +317,6 @@ function Hero() {
   );
 }
 
-function TrustStrip() {
-  return (
-    <section className="relative py-14 border-y border-white/5">
-      <Reveal className="text-center mb-8">
-        <div className="text-[10px] tracking-[0.35em] uppercase text-muted-foreground">Trusted by buyers worldwide · shipped with</div>
-      </Reveal>
-      <div className="relative overflow-hidden">
-        <div className="flex animate-marquee gap-16 whitespace-nowrap">
-          {[...shippingPartners, ...shippingPartners].map((p, i) => (
-            <div key={i} className="text-2xl font-light tracking-[0.2em] text-foreground/35 hover:text-foreground/80 transition shrink-0">
-              {p}
-            </div>
-          ))}
-        </div>
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[var(--background)] to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[var(--background)] to-transparent" />
-      </div>
-    </section>
-  );
-}
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
