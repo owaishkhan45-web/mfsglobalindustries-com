@@ -30,8 +30,9 @@ export default function CustomCursor() {
       setHovering(!!interactive);
     };
     const loop = () => {
-      rx += (mx - rx) * 0.18;
-      ry += (my - ry) * 0.18;
+      // Much faster follow (was 0.18)
+      rx += (mx - rx) * 0.45;
+      ry += (my - ry) * 0.45;
       if (ringRef.current) {
         ringRef.current.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
       }
@@ -59,15 +60,15 @@ export default function CustomCursor() {
         aria-hidden
         className="pointer-events-none fixed left-0 top-0 z-[9999] hidden md:block"
         style={{
-          width: hovering ? 56 : 36,
-          height: hovering ? 56 : 36,
+          width: hovering ? 48 : 30,
+          height: hovering ? 48 : 30,
           borderRadius: 999,
-          border: "1px solid oklch(0.82 0.13 85 / 0.6)",
+          border: "1px solid oklch(0.88 0.10 92 / 0.7)",
           boxShadow: hovering
-            ? "0 0 24px oklch(0.82 0.13 85 / 0.6), inset 0 0 12px oklch(0.82 0.13 85 / 0.2)"
-            : "0 0 12px oklch(0.82 0.13 85 / 0.35)",
-          background: hovering ? "oklch(0.82 0.13 85 / 0.08)" : "transparent",
-          transition: "width 200ms ease, height 200ms ease, background 200ms ease, box-shadow 200ms ease",
+            ? "0 0 32px oklch(0.88 0.10 92 / 0.7), inset 0 0 16px oklch(0.88 0.10 92 / 0.25)"
+            : "0 0 14px oklch(0.88 0.10 92 / 0.45)",
+          background: hovering ? "oklch(0.88 0.10 92 / 0.10)" : "transparent",
+          transition: "width 140ms ease, height 140ms ease, background 140ms ease, box-shadow 140ms ease",
           mixBlendMode: "screen",
         }}
       />
@@ -79,8 +80,8 @@ export default function CustomCursor() {
           width: 6,
           height: 6,
           borderRadius: 999,
-          background: "oklch(0.92 0.12 88)",
-          boxShadow: "0 0 12px oklch(0.82 0.13 85 / 0.9)",
+          background: "oklch(0.96 0.08 92)",
+          boxShadow: "0 0 14px oklch(0.88 0.10 92 / 0.95)",
         }}
       />
     </>

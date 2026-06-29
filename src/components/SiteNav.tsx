@@ -7,11 +7,8 @@ import logo from "@/assets/mfs-logo.asset.json";
 const links = [
   { label: "Home", to: "/", hash: "" },
   { label: "Products", to: "/", hash: "#products" },
-  { label: "Industries", to: "/", hash: "#industries" },
   { label: "Why Us", to: "/", hash: "#why-us" },
-  { label: "Process", to: "/", hash: "#process" },
-  { label: "Testimonials", to: "/", hash: "#testimonials" },
-  { label: "Blog", to: "/blog", hash: "" },
+  { label: "Services", to: "/", hash: "#services" },
   { label: "Contact", to: "/contact", hash: "" },
 ];
 
