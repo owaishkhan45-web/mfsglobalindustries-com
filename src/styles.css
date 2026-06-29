@@ -35,46 +35,47 @@
   --color-charcoal: var(--charcoal);
   --color-ink: var(--ink);
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Cormorant Garamond", "Playfair Display", ui-serif, Georgia, serif;
 }
 
 :root {
   --radius: 1rem;
-  /* Luxury dark theme */
-  --background: oklch(0.16 0.012 250);
-  --foreground: oklch(0.97 0.005 250);
-  --ink: oklch(0.11 0.015 250);
-  --charcoal: oklch(0.19 0.014 250);
-  --card: oklch(0.22 0.014 250 / 0.55);
-  --card-foreground: oklch(0.97 0.005 250);
-  --popover: oklch(0.20 0.014 250);
-  --popover-foreground: oklch(0.97 0.005 250);
-  --primary: oklch(0.82 0.13 85); /* gold */
-  --primary-foreground: oklch(0.14 0.014 250);
-  --secondary: oklch(0.28 0.02 250);
-  --secondary-foreground: oklch(0.97 0.005 250);
-  --muted: oklch(0.24 0.014 250);
-  --muted-foreground: oklch(0.72 0.012 250);
-  --accent: oklch(0.55 0.18 260);
-  --accent-foreground: oklch(0.97 0.005 250);
+  /* Premium emerald + champagne palette */
+  --background: oklch(0.14 0.025 165);
+  --foreground: oklch(0.97 0.012 90);
+  --ink: oklch(0.10 0.022 165);
+  --charcoal: oklch(0.17 0.025 165);
+  --card: oklch(0.20 0.025 165 / 0.55);
+  --card-foreground: oklch(0.97 0.012 90);
+  --popover: oklch(0.18 0.025 165);
+  --popover-foreground: oklch(0.97 0.012 90);
+  --primary: oklch(0.85 0.10 90); /* champagne */
+  --primary-foreground: oklch(0.12 0.022 165);
+  --secondary: oklch(0.28 0.04 165);
+  --secondary-foreground: oklch(0.97 0.012 90);
+  --muted: oklch(0.24 0.025 165);
+  --muted-foreground: oklch(0.74 0.018 100);
+  --accent: oklch(0.62 0.14 160);
+  --accent-foreground: oklch(0.10 0.022 165);
   --destructive: oklch(0.58 0.22 27);
-  --destructive-foreground: oklch(0.97 0.005 250);
+  --destructive-foreground: oklch(0.97 0.012 90);
   --border: oklch(1 0 0 / 0.08);
   --input: oklch(1 0 0 / 0.12);
-  --ring: oklch(0.82 0.13 85);
-  --gold: oklch(0.82 0.13 85);
-  --gold-soft: oklch(0.88 0.10 88);
+  --ring: oklch(0.85 0.10 90);
+  --gold: oklch(0.88 0.10 92);
+  --gold-soft: oklch(0.92 0.08 95);
 
-  --grad-gold: linear-gradient(135deg, oklch(0.88 0.12 88) 0%, oklch(0.74 0.14 78) 100%);
-  --grad-radial-gold: radial-gradient(circle at 30% 20%, oklch(0.82 0.13 85 / 0.25), transparent 60%);
-  --grad-hero: radial-gradient(ellipse at 50% 0%, oklch(0.32 0.10 260 / 0.55), transparent 60%),
-    radial-gradient(ellipse at 80% 80%, oklch(0.82 0.13 85 / 0.15), transparent 60%);
-  --shadow-glow: 0 0 60px -10px oklch(0.82 0.13 85 / 0.45);
+  --grad-gold: linear-gradient(135deg, oklch(0.94 0.08 92) 0%, oklch(0.78 0.11 85) 100%);
+  --grad-radial-gold: radial-gradient(circle at 30% 20%, oklch(0.85 0.10 90 / 0.22), transparent 60%);
+  --grad-hero: radial-gradient(ellipse at 50% 0%, oklch(0.30 0.10 170 / 0.55), transparent 60%),
+    radial-gradient(ellipse at 80% 80%, oklch(0.65 0.16 155 / 0.18), transparent 60%),
+    radial-gradient(ellipse at 15% 60%, oklch(0.85 0.10 90 / 0.10), transparent 55%);
+  --shadow-glow: 0 0 60px -10px oklch(0.85 0.10 90 / 0.55);
   --shadow-elegant: 0 30px 80px -30px oklch(0 0 0 / 0.6), 0 0 0 1px oklch(1 0 0 / 0.05);
 }
 
 .dark {
-  --background: oklch(0.16 0.012 250);
+  --background: oklch(0.14 0.025 165);
 }
 
 @layer base {
@@ -86,6 +87,11 @@
   }
   body {
     background-color: var(--color-background);
+    background-image:
+      radial-gradient(ellipse at 20% 0%, oklch(0.28 0.08 165 / 0.5), transparent 55%),
+      radial-gradient(ellipse at 90% 30%, oklch(0.60 0.15 155 / 0.10), transparent 55%),
+      radial-gradient(ellipse at 50% 100%, oklch(0.85 0.10 90 / 0.07), transparent 55%);
+    background-attachment: fixed;
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv11";
@@ -95,12 +101,19 @@
   }
   body.no-custom-cursor { cursor: auto; }
   h1, h2, h3, h4 {
-    letter-spacing: -0.035em;
-    font-weight: 300;
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    font-weight: 400;
   }
   ::selection {
-    background: oklch(0.82 0.13 85 / 0.3);
-    color: oklch(0.97 0.005 250);
+    background: oklch(0.85 0.10 90 / 0.3);
+    color: oklch(0.97 0.012 90);
+  }
+
+  /* Universal glow on hover for any interactive element */
+  a:hover, button:hover, [data-cursor="hover"]:hover {
+    box-shadow: 0 0 0 1px oklch(0.85 0.10 90 / 0.35), 0 0 28px -2px oklch(0.85 0.10 90 / 0.45);
+    transition: box-shadow 220ms ease;
   }
 }
 
@@ -115,13 +128,13 @@
   border: 1px solid oklch(1 0 0 / 0.10);
 }
 @utility text-gold-gradient {
-  background: linear-gradient(135deg, oklch(0.92 0.10 88), oklch(0.74 0.14 78));
+  background: linear-gradient(135deg, oklch(0.95 0.07 92), oklch(0.78 0.11 85));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 @utility hairline {
-  background: linear-gradient(90deg, transparent, oklch(0.82 0.13 85 / 0.5), transparent);
+  background: linear-gradient(90deg, transparent, oklch(0.85 0.10 90 / 0.5), transparent);
   height: 1px;
 }
 @utility shimmer {
@@ -138,8 +151,8 @@
   50% { transform: translateY(-10px); }
 }
 @keyframes pulse-ring {
-  0% { box-shadow: 0 0 0 0 oklch(0.82 0.13 85 / 0.55); }
-  100% { box-shadow: 0 0 0 18px oklch(0.82 0.13 85 / 0); }
+  0% { box-shadow: 0 0 0 0 oklch(0.85 0.10 90 / 0.55); }
+  100% { box-shadow: 0 0 0 18px oklch(0.85 0.10 90 / 0); }
 }
 @keyframes marquee {
   from { transform: translateX(0); }
