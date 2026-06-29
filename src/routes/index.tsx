@@ -262,7 +262,7 @@ function Hero() {
           >
             {[
               { k: "15+", v: "Countries" },
-              { k: "500+", v: "Containers" },
+              { k: "13", v: "Categories" },
               { k: "24h", v: "Quotation" },
             ].map((s) => (
               <div key={s.v}>
