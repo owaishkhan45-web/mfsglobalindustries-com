@@ -17,7 +17,7 @@ export default function SiteFooter() {
               </div>
             </div>
             <p className="mt-6 max-w-sm text-sm font-light text-foreground/65 leading-relaxed">
-              Connecting Indian excellence with global markets — premium agricultural commodities, food products, paper products and industrial raw materials, delivered with consistent quality and reliable logistics.
+              Connecting Indian excellence with global markets — premium agricultural commodities, food products, tobacco, areca nuts and industrial raw materials, delivered with consistent quality and reliable logistics.
             </p>
             <div className="mt-6 flex items-center gap-3">
               {[LinkedinLogo, InstagramLogo, FacebookLogo, WhatsappLogo].map((Icon, i) => (
@@ -31,7 +31,7 @@ export default function SiteFooter() {
           <div>
             <div className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground mb-5">Quick Links</div>
             <ul className="space-y-3 text-sm font-light">
-              {["About", "Products", "Industries", "Process", "Blog", "Contact"].map((x) => (
+              {["About", "Products", "Why Us", "Services", "Contact"].map((x) => (
                 <li key={x}><Link to="/" className="text-foreground/75 hover:text-foreground transition" data-cursor="hover">{x}</Link></li>
               ))}
             </ul>
@@ -40,7 +40,7 @@ export default function SiteFooter() {
           <div>
             <div className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground mb-5">Products</div>
             <ul className="space-y-3 text-sm font-light">
-              {["Chickpeas", "Buffalo Meat", "Fresh Produce", "Sesame & Maize", "Cotton Yarn", "Paper Products"].map((x) => (
+              {["Bananas", "Kabuli Chickpeas", "Whole Leaf Tobacco", "Areca Nuts", "Sesame & Maize", "Buffalo Meat"].map((x) => (
                 <li key={x}><a href="#products" className="text-foreground/75 hover:text-foreground transition" data-cursor="hover">{x}</a></li>
               ))}
             </ul>
