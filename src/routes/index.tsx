@@ -668,51 +668,6 @@ function FAQ() {
   );
 }
 
-function BlogPreview() {
-  const posts = [
-    { t: "How to Import Agricultural Products from India", read: "8 min", date: "Jun 2026" },
-    { t: "Why Indian Chickpeas are in Global Demand", read: "6 min", date: "May 2026" },
-    { t: "Complete Guide to Frozen Halal Buffalo Meat Export", read: "10 min", date: "May 2026" },
-  ];
-  return (
-    <section id="blog" className="relative py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
-          <div>
-            <Reveal><SectionLabel>From The Journal</SectionLabel></Reveal>
-            <Reveal delay={0.05}>
-              <h2 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-light leading-[1.02]">Export <span className="text-gold-gradient italic">insights.</span></h2>
-            </Reveal>
-          </div>
-          <Reveal delay={0.1}>
-            <Link to="/blog" className="inline-flex items-center gap-2 rounded-full glass px-5 py-2.5 text-sm font-light" data-cursor="hover">
-              All articles <ArrowUpRight weight="light" size={14}/>
-            </Link>
-          </Reveal>
-        </div>
-        <StaggerGroup className="grid gap-5 md:grid-cols-3">
-          {posts.map((p, i) => (
-            <StaggerItem key={p.t}>
-              <Link to="/blog" className="group block rounded-3xl glass overflow-hidden h-full" data-cursor="hover">
-                <div className="aspect-[5/3] overflow-hidden">
-                  <img src={[chickpeas, spices, meat][i]} alt={p.t} loading="lazy" width={1024} height={614} className="h-full w-full object-cover transition-transform duration-[1.2s] group-hover:scale-105"/>
-                </div>
-                <div className="p-6">
-                  <div className="text-[10px] tracking-[0.25em] uppercase text-[var(--gold)]">{p.date} · {p.read}</div>
-                  <h3 className="mt-3 text-xl font-light leading-snug">{p.t}</h3>
-                  <div className="mt-5 inline-flex items-center gap-2 text-sm text-foreground/70 group-hover:text-foreground">
-                    Read article <ArrowRight weight="light" size={14}/>
-                  </div>
-                </div>
-              </Link>
-            </StaggerItem>
-          ))}
-        </StaggerGroup>
-      </div>
-    </section>
-  );
-}
-
 function CTA() {
   return (
     <section id="cta" className="relative py-24">
