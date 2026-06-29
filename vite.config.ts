@@ -1,12 +1,13 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
-import { nitro } from "nitro/vite";
+
+// Detect if running inside a Vercel deployment build environment
+const isVercel = !!process.env.VERCEL;
 
 export default defineConfig({
-  vite: {
-    plugins: [
-      nitro({
-        preset: "vercel",
-      }),
-    ],
+  nitro: isVercel ? { preset: "vercel" } : true,
+  tanstackStart: {
+    server: {
+      entry: "server"
+    },
   },
 });
