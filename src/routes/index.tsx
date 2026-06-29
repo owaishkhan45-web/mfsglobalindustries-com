@@ -3,26 +3,31 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight, ArrowUpRight, Check, Plus, Minus, Globe, ShieldCheck, Truck,
-  CurrencyDollar, Headset, Package, FileText, Buildings, Factory, ShoppingBag,
-  ForkKnife, Storefront, TShirt, PawPrint, Leaf, Stack,
+  CurrencyDollar, Headset,
 } from "@phosphor-icons/react";
 
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/Reveal";
 
 import chickpeas from "@/assets/product-chickpeas.jpg";
+import desiChickpeas from "@/assets/product-desi-chickpeas.jpg";
 import bananas from "@/assets/product-bananas.jpg";
-import paper from "@/assets/product-paper.jpg";
 import cargo from "@/assets/hero-cargo.jpg";
-import spices from "@/assets/product-spices.jpg";
-import grains from "@/assets/product-grains.jpg";
+import ginger from "@/assets/product-ginger.jpg";
+import garlic from "@/assets/product-garlic.jpg";
+import sesame from "@/assets/product-sesame.jpg";
+import maize from "@/assets/product-maize.jpg";
+import soybeans from "@/assets/product-soybeans.jpg";
 import cotton from "@/assets/product-cotton.jpg";
 import meat from "@/assets/product-meat.jpg";
+import tobaccoLeaf from "@/assets/product-tobacco-leaf.jpg";
+import tobaccoGround from "@/assets/product-tobacco-ground.jpg";
+import areca from "@/assets/product-areca.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "MFS Global Industries — Premium Indian Exports Worldwide" },
-      { name: "description", content: "Trusted Indian export company supplying premium agricultural commodities, food products, paper products and industrial raw materials to buyers worldwide." },
+      { name: "description", content: "Trusted Indian export company supplying premium agricultural commodities, food products, tobacco, areca nuts and industrial raw materials to buyers worldwide." },
       { property: "og:title", content: "MFS Global Industries — Premium Indian Exports" },
       { property: "og:description", content: "Connecting Indian excellence with global markets." },
       { property: "og:image", content: cargo },
@@ -31,72 +36,36 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
-const heroSlides = [chickpeas, bananas, paper, spices, grains, cotton];
+const heroSlides = [bananas, chickpeas, tobaccoLeaf, maize, areca, ginger];
 
 const products = [
-  { name: "Kabuli Chickpeas", origin: "India", grade: "Export Grade A", img: chickpeas, tag: "Pulses" },
-  { name: "Desi Chickpeas", origin: "India", grade: "Premium", img: chickpeas, tag: "Pulses" },
+  { name: "Fresh Bananas", origin: "India", grade: "Export Premium · Cavendish", img: bananas, tag: "Fresh" },
+  { name: "Kabuli Chickpeas", origin: "India", grade: "Export Grade A · 10–12mm", img: chickpeas, tag: "Pulses" },
+  { name: "Desi Chickpeas", origin: "India", grade: "Premium · Kala Chana", img: desiChickpeas, tag: "Pulses" },
+  { name: "Whole Leaf Tobacco", origin: "India", grade: "Sun-Cured FCV", img: tobaccoLeaf, tag: "Tobacco" },
+  { name: "Grinded Tobacco", origin: "India", grade: "Fine Cut · Export", img: tobaccoGround, tag: "Tobacco" },
+  { name: "Areca Nuts", origin: "India", grade: "Whole & Split", img: areca, tag: "Nuts" },
+  { name: "Fresh Ginger", origin: "India", grade: "Export Quality", img: ginger, tag: "Fresh" },
+  { name: "Fresh Garlic", origin: "India", grade: "Premium White", img: garlic, tag: "Fresh" },
+  { name: "Sesame Seeds", origin: "India", grade: "Natural 99.95%", img: sesame, tag: "Seeds" },
+  { name: "Premium Maize", origin: "India", grade: "Non-GMO Yellow", img: maize, tag: "Grains" },
+  { name: "Non-GMO Soybeans", origin: "India", grade: "Export Grade", img: soybeans, tag: "Grains" },
   { name: "Buffalo Meat", origin: "India", grade: "Halal Frozen", img: meat, tag: "Frozen" },
-  { name: "Fresh Bananas", origin: "India", grade: "Cavendish", img: bananas, tag: "Fresh" },
-  { name: "Fresh Ginger", origin: "India", grade: "Export Quality", img: spices, tag: "Fresh" },
-  { name: "Fresh Garlic", origin: "India", grade: "Premium White", img: spices, tag: "Fresh" },
-  { name: "Sesame Seeds", origin: "India", grade: "Natural 99.95%", img: grains, tag: "Seeds" },
-  { name: "Premium Maize", origin: "India", grade: "Non-GMO", img: grains, tag: "Grains" },
-  { name: "Non-GMO Soybeans", origin: "India", grade: "Export Grade", img: grains, tag: "Grains" },
   { name: "100% Cotton Yarn", origin: "India", grade: "Combed Ring-Spun", img: cotton, tag: "Textile" },
-  { name: "Kraft Paper", origin: "India", grade: "Virgin Pulp", img: paper, tag: "Paper" },
-  { name: "Duplex Board", origin: "India", grade: "GC1 / GC2", img: paper, tag: "Paper" },
-  { name: "Paper Rolls", origin: "India", grade: "Industrial", img: paper, tag: "Paper" },
-  { name: "Packaging Paper", origin: "India", grade: "Food Safe", img: paper, tag: "Paper" },
-  { name: "Corrugated Paper", origin: "India", grade: "5-Ply", img: paper, tag: "Paper" },
 ];
 
 const stats = [
   { v: 15, suffix: "+", label: "Countries Served" },
-  { v: 500, suffix: "+", label: "Containers Delivered" },
+  { v: 13, suffix: "", label: "Product Categories" },
   { v: 99, suffix: "%", label: "On-Time Shipments" },
   { v: 100, suffix: "%", label: "Quality Inspection" },
 ];
-
-const shippingPartners = ["MSC", "Maersk", "CMA CGM", "COSCO", "Hapag-Lloyd", "FedEx", "DHL", "ONE", "Evergreen", "Yang Ming"];
 
 const features = [
   { icon: ShieldCheck, title: "International Quality", desc: "Compliance with ISO, HACCP, FSSAI, and destination-country standards on every shipment." },
   { icon: Truck, title: "Reliable Logistics", desc: "Strategic port relationships across Mundra, Nhava Sheva and Kolkata for on-time delivery." },
   { icon: CurrencyDollar, title: "Competitive Pricing", desc: "Direct sourcing partnerships eliminate intermediaries and deliver consistent margins." },
   { icon: Headset, title: "Dedicated Support", desc: "A single export manager handles documentation, inspection and post-shipment queries." },
-];
-
-const processSteps = [
-  { n: "01", title: "Product Inquiry", desc: "Share specifications, target volume and destination port." },
-  { n: "02", title: "Quotation", desc: "Receive CIF / FOB quote with full Incoterm transparency within 24 hours." },
-  { n: "03", title: "Sample Approval", desc: "Couriered samples for laboratory and visual validation." },
-  { n: "04", title: "Production & QC", desc: "Sourcing, processing and third-party inspection at origin." },
-  { n: "05", title: "Packaging", desc: "Custom labeling, OEM and private-label options available." },
-  { n: "06", title: "Documentation", desc: "Phyto, COO, BL, invoice, packing list, halal & origin certificates." },
-  { n: "07", title: "International Delivery", desc: "Door-to-door tracking until clearance at destination port." },
-];
-
-const industries = [
-  { icon: ForkKnife, title: "Food Importers" },
-  { icon: Buildings, title: "Wholesale Distributors" },
-  { icon: ShoppingBag, title: "Retail Chains" },
-  { icon: Storefront, title: "Supermarkets" },
-  { icon: Factory, title: "Food Manufacturers" },
-  { icon: Stack, title: "Paper Industry" },
-  { icon: PawPrint, title: "Animal Feed" },
-  { icon: TShirt, title: "Textile Manufacturers" },
-];
-
-const testimonials = [
-  { name: "Ahmed Al-Mansouri", country: "UAE", flag: "🇦🇪", company: "Gulf Trade FZE", product: "Kabuli Chickpeas", vol: "12 × 40ft", review: "Consistent grade and on-time arrival every quarter. MFS has become our primary Indian supplier." },
-  { name: "Mehmet Yilmaz", country: "Turkey", flag: "🇹🇷", company: "Istanbul Foods", product: "Sesame Seeds", vol: "8 × 20ft", review: "Their sesame purity reports match exactly what arrives. Documentation is flawless." },
-  { name: "Khalid Al-Rashid", country: "Saudi Arabia", flag: "🇸🇦", company: "Riyadh Importers", product: "Buffalo Meat", vol: "24 × 40ft", review: "Halal certification, cold-chain integrity and competitive pricing — a rare combination." },
-  { name: "Mohammed Hassan", country: "Egypt", flag: "🇪🇬", company: "Cairo Agro", product: "Maize", vol: "30 × 40ft", review: "Non-GMO documentation and fast Suez routing made our supply planning easier." },
-  { name: "Lin Wei", country: "Malaysia", flag: "🇲🇾", company: "Penang Pulp", product: "Kraft Paper", vol: "6 × 40ft", review: "Stable GSM, clean rolls, and proactive communication on shipping schedules." },
-  { name: "Nguyen Anh", country: "Vietnam", flag: "🇻🇳", company: "Hanoi Distributors", product: "Cotton Yarn", vol: "10 × 40ft", review: "Yarn count consistency is excellent. Lab reports match their stated specifications." },
-  { name: "Thabo Mokoena", country: "South Africa", flag: "🇿🇦", company: "Durban Foods", product: "Garlic & Ginger", vol: "5 × 40ft", review: "Fresh produce arrived in pristine condition — appreciate the attention to cold-chain detail." },
-  { name: "Klaus Werner", country: "Germany", flag: "🇩🇪", company: "Hamburg Trading GmbH", product: "Soybeans", vol: "14 × 40ft", review: "Their export discipline is on par with European standards. Highly recommended." },
 ];
 
 const faqs = [
@@ -106,9 +75,7 @@ const faqs = [
   { q: "What is your typical lead time?", a: "10-15 days for production-to-FOB, plus transit time of 7-35 days depending on destination port." },
   { q: "Which Incoterms do you operate on?", a: "FOB, CIF, CFR, EXW, and DAP. We provide transparent breakdowns for each in the quotation." },
   { q: "How do you assure quality?", a: "Pre-shipment inspection by SGS, Intertek or Bureau Veritas (buyer's choice), plus our internal QC at origin." },
-  { q: "Can you arrange independent inspection?", a: "Yes — we coordinate buyer-nominated inspection agencies and share reports before BL release." },
   { q: "Do you provide samples?", a: "Yes, courier samples are available. Sample cost is refundable against confirmed order." },
-  { q: "What packaging options are available?", a: "PP woven bags, jute bags, vacuum-sealed cartons, and bulk options. Custom labeling is standard." },
   { q: "Do you offer custom branding / private label?", a: "Yes, available in our Enterprise Supply Partnership tier with dedicated artwork management." },
 ];
 
@@ -136,17 +103,12 @@ function HomePage() {
     <div className="relative overflow-hidden">
       <PageLoader />
       <Hero />
-      <TrustStrip />
       <About />
       <Products />
       <WhyUs />
-      <Process />
-      <Industries />
-      <Testimonials />
       <GlobalPresence />
       <Services />
       <FAQ />
-      <BlogPreview />
       <CTA />
     </div>
   );
