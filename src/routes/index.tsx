@@ -254,7 +254,7 @@ function Hero() {
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2, duration: 0.8 }}
             className="mt-7 max-w-xl text-[15px] sm:text-base font-light leading-relaxed text-foreground/75"
           >
-            MFS Global Industries is a trusted Indian export company supplying premium agricultural commodities, food products, paper products and industrial raw materials to buyers worldwide — with consistent quality, competitive pricing and reliable logistics.
+            MFS Global Industries is a trusted Indian export company specialising in premium spices, agricultural commodities, food products, tobacco, areca nuts and industrial raw materials — with consistent quality, competitive pricing and reliable logistics to buyers worldwide.
           </motion.p>
 
           <motion.div
@@ -285,8 +285,8 @@ function Hero() {
             className="mt-12 grid grid-cols-3 gap-6 max-w-md"
           >
             {[
+              { k: "20+", v: "Categories" },
               { k: "15+", v: "Countries" },
-              { k: "13", v: "Categories" },
               { k: "24h", v: "Quotation" },
             ].map((s) => (
               <div key={s.v}>
