@@ -722,3 +722,130 @@ function CTA() {
     </section>
   );
 }
+
+/* ========= NEW SECTIONS ========= */
+
+const trustBadges = [
+  { code: "APEDA", label: "Agri Export" },
+  { code: "FSSAI", label: "Food Safety" },
+  { code: "IEC", label: "Import·Export" },
+  { code: "DGFT", label: "Ministry Reg." },
+  { code: "MSME", label: "Certified" },
+  { code: "ISO", label: "9001:2015" },
+  { code: "HACCP", label: "Compliant" },
+  { code: "SGS", label: "Inspected" },
+];
+
+function TrustBar() {
+  return (
+    <section className="relative py-14 border-y border-white/5">
+      <div className="mx-auto max-w-7xl px-6">
+        <Reveal>
+          <div className="text-center mb-8">
+            <div className="text-[10px] tracking-[0.35em] uppercase text-[var(--gold)]">Certified · Compliant · Verified</div>
+          </div>
+        </Reveal>
+        <div className="grid grid-cols-4 lg:grid-cols-8 gap-4">
+          {trustBadges.map((b, i) => (
+            <Reveal key={b.code} delay={i * 0.04}>
+              <div className="group rounded-2xl glass px-3 py-4 text-center transition hover:-translate-y-0.5">
+                <Certificate weight="light" size={22} className="mx-auto text-[var(--gold)]" />
+                <div className="mt-2 text-sm font-extrabold tracking-wider text-foreground">{b.code}</div>
+                <div className="text-[9px] tracking-[0.15em] uppercase text-muted-foreground mt-0.5">{b.label}</div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const industries = [
+  { icon: ForkKnife, name: "Food & Beverage", desc: "Restaurants, hotels, catering & FMCG brands sourcing premium ingredients." },
+  { icon: Storefront, name: "Retail & Distribution", desc: "Supermarkets, importers and wholesale distributors across five continents." },
+  { icon: Factory, name: "Food Processing", desc: "Mills, packagers and processors sourcing consistent bulk raw material." },
+  { icon: FirstAidKit, name: "Nutraceutical", desc: "Turmeric, spice extracts and grains for supplement & wellness brands." },
+  { icon: Buildings, name: "HoReCa", desc: "Hospitality chains with strict specification and volume commitments." },
+  { icon: Leaf, name: "Organic Trade", desc: "Certified organic buyers requiring traceable, farm-verified sourcing." },
+];
+
+function Industries() {
+  return (
+    <section id="industries" className="relative py-32">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <Reveal><SectionLabel>Industries We Serve</SectionLabel></Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="mt-5 text-4xl sm:text-5xl lg:text-6xl leading-[1.02]">
+              Trusted across <span className="text-terracotta-gradient italic">every vertical.</span>
+            </h2>
+          </Reveal>
+        </div>
+        <StaggerGroup className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {industries.map((it) => (
+            <StaggerItem key={it.name}>
+              <div className="group h-full rounded-3xl glass p-7 transition hover:-translate-y-1">
+                <div className="grid h-12 w-12 place-items-center rounded-2xl glass-strong">
+                  <it.icon weight="light" size={22} className="text-[var(--gold)]" />
+                </div>
+                <h3 className="mt-6 text-xl font-semibold">{it.name}</h3>
+                <p className="mt-3 text-sm font-light text-foreground/70 leading-relaxed">{it.desc}</p>
+              </div>
+            </StaggerItem>
+          ))}
+        </StaggerGroup>
+      </div>
+    </section>
+  );
+}
+
+const processSteps = [
+  { n: "01", title: "Inquiry", desc: "Share your product, grade, quantity and destination — we respond within 24 hours with a transparent quotation." },
+  { n: "02", title: "Sampling", desc: "Physical or courier samples with full specification sheet, origin and lab report where applicable." },
+  { n: "03", title: "Contract & Payment", desc: "Proforma invoice, sales contract and mutually agreed Incoterms with LC or TT payment terms." },
+  { n: "04", title: "Sourcing & QC", desc: "Direct-from-source procurement with in-house quality control and third-party inspection (SGS / Intertek)." },
+  { n: "05", title: "Documentation & Shipping", desc: "APEDA / Phyto / Health certificates, container booking and dispatch from Mundra, Nhava Sheva or Kolkata." },
+  { n: "06", title: "Delivered", desc: "Real-time tracking to your destination port with dedicated post-shipment support." },
+];
+
+function ExportProcess() {
+  return (
+    <section id="process" className="relative py-32">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <Reveal><SectionLabel>Export Process</SectionLabel></Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="mt-5 text-4xl sm:text-5xl lg:text-6xl leading-[1.02]">
+              From inquiry to <span className="text-terracotta-gradient italic">delivered container.</span>
+            </h2>
+          </Reveal>
+        </div>
+        <div className="relative">
+          <div className="absolute left-1/2 top-0 bottom-0 w-px hidden lg:block" style={{ background: "linear-gradient(180deg, transparent, var(--terracotta), transparent)" }} />
+          <div className="space-y-6">
+            {processSteps.map((s, i) => (
+              <Reveal key={s.n} delay={i * 0.05}>
+                <div className={`grid lg:grid-cols-2 gap-6 items-center ${i % 2 === 1 ? "lg:[direction:rtl]" : ""}`}>
+                  <div className={`rounded-3xl glass p-7 ${i % 2 === 1 ? "lg:[direction:ltr]" : ""}`}>
+                    <div className="flex items-center gap-4">
+                      <span className="grid place-items-center h-14 w-14 rounded-2xl text-lg font-extrabold text-[var(--ink)]" style={{ background: "var(--grad-gold)" }}>
+                        {s.n}
+                      </span>
+                      <h3 className="text-2xl font-semibold">{s.title}</h3>
+                    </div>
+                    <p className="mt-4 text-sm font-light text-foreground/75 leading-relaxed">{s.desc}</p>
+                  </div>
+                  <div className="hidden lg:flex justify-center">
+                    <div className="grid place-items-center h-4 w-4 rounded-full ring-4 ring-[var(--background)]" style={{ background: "var(--terracotta)" }} />
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
