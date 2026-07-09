@@ -3,7 +3,8 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight, ArrowUpRight, Check, Plus, Minus, Globe, ShieldCheck, Truck,
-  CurrencyDollar, Headset,
+  CurrencyDollar, Headset, Certificate, Package, Leaf, Factory, Buildings,
+  ForkKnife, Storefront, FirstAidKit,
 } from "@phosphor-icons/react";
 
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/Reveal";
@@ -22,44 +23,63 @@ import meat from "@/assets/product-meat.jpg";
 import tobaccoLeaf from "@/assets/product-tobacco-leaf.jpg";
 import tobaccoGround from "@/assets/product-tobacco-ground.jpg";
 import areca from "@/assets/product-areca.jpg";
+import rice from "@/assets/product-rice.jpg";
+import wheat from "@/assets/product-wheat.jpg";
+import turmeric from "@/assets/product-turmeric.jpg";
+import cumin from "@/assets/product-cumin.jpg";
+import chilli from "@/assets/product-chilli.jpg";
+import mangoes from "@/assets/product-mangoes.jpg";
+import coriander from "@/assets/product-coriander.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "MFS Global Industries — Premium Indian Exports Worldwide" },
-      { name: "description", content: "Trusted Indian export company supplying premium agricultural commodities, food products, tobacco, areca nuts and industrial raw materials to buyers worldwide." },
+      { name: "description", content: "Trusted Indian export company supplying premium spices, agricultural commodities, food products, tobacco, areca nuts and industrial raw materials to buyers worldwide." },
       { property: "og:title", content: "MFS Global Industries — Premium Indian Exports" },
-      { property: "og:description", content: "Connecting Indian excellence with global markets." },
+      { property: "og:description", content: "Connecting Indian excellence with global markets — spices, grains, fruits, food & industrial exports." },
       { property: "og:image", content: cargo },
     ],
   }),
   component: HomePage,
 });
 
-const heroSlides = [bananas, chickpeas, tobaccoLeaf, maize, areca, ginger];
+const heroSlides = [bananas, turmeric, chilli, mangoes, chickpeas, rice, tobaccoLeaf, areca];
 
 const products = [
-  { name: "Fresh Bananas", origin: "India", grade: "Export Premium · Cavendish", img: bananas, tag: "Fresh" },
-  { name: "Kabuli Chickpeas", origin: "India", grade: "Export Grade A · 10–12mm", img: chickpeas, tag: "Pulses" },
-  { name: "Desi Chickpeas", origin: "India", grade: "Premium · Kala Chana", img: desiChickpeas, tag: "Pulses" },
-  { name: "Whole Leaf Tobacco", origin: "India", grade: "Sun-Cured FCV", img: tobaccoLeaf, tag: "Tobacco" },
-  { name: "Grinded Tobacco", origin: "India", grade: "Fine Cut · Export", img: tobaccoGround, tag: "Tobacco" },
-  { name: "Areca Nuts", origin: "India", grade: "Whole & Split", img: areca, tag: "Nuts" },
-  { name: "Fresh Ginger", origin: "India", grade: "Export Quality", img: ginger, tag: "Fresh" },
-  { name: "Fresh Garlic", origin: "India", grade: "Premium White", img: garlic, tag: "Fresh" },
-  { name: "Sesame Seeds", origin: "India", grade: "Natural 99.95%", img: sesame, tag: "Seeds" },
+  // Spices
+  { name: "Turmeric Powder", origin: "India", grade: "5% Curcumin · Erode", img: turmeric, tag: "Spices" },
+  { name: "Whole Red Chilli", origin: "India", grade: "Teja · Sannam", img: chilli, tag: "Spices" },
+  { name: "Cumin Seeds", origin: "India", grade: "Machine Cleaned 99%", img: cumin, tag: "Spices" },
+  { name: "Coriander Seeds", origin: "India", grade: "Eagle · Green", img: coriander, tag: "Spices" },
+  // Grains & Pulses
+  { name: "Basmati Rice", origin: "India", grade: "1121 Steam · Sella", img: rice, tag: "Grains" },
+  { name: "Indian Wheat", origin: "India", grade: "Sharbati · Milling", img: wheat, tag: "Grains" },
+  { name: "Kabuli Chickpeas", origin: "India", grade: "Grade A · 10–12mm", img: chickpeas, tag: "Pulses" },
+  { name: "Desi Chickpeas", origin: "India", grade: "Kala Chana", img: desiChickpeas, tag: "Pulses" },
   { name: "Premium Maize", origin: "India", grade: "Non-GMO Yellow", img: maize, tag: "Grains" },
   { name: "Non-GMO Soybeans", origin: "India", grade: "Export Grade", img: soybeans, tag: "Grains" },
+  { name: "Sesame Seeds", origin: "India", grade: "Natural 99.95%", img: sesame, tag: "Seeds" },
+  // Fresh
+  { name: "Alphonso Mangoes", origin: "India", grade: "Ratnagiri · Devgad", img: mangoes, tag: "Fresh" },
+  { name: "Cavendish Bananas", origin: "India", grade: "Export Premium", img: bananas, tag: "Fresh" },
+  { name: "Fresh Ginger", origin: "India", grade: "Export Quality", img: ginger, tag: "Fresh" },
+  { name: "Fresh Garlic", origin: "India", grade: "Premium White", img: garlic, tag: "Fresh" },
+  // Specialty
+  { name: "Whole Leaf Tobacco", origin: "India", grade: "Sun-Cured FCV", img: tobaccoLeaf, tag: "Tobacco" },
+  { name: "Ground Tobacco", origin: "India", grade: "Fine Cut · Export", img: tobaccoGround, tag: "Tobacco" },
+  { name: "Areca Nuts", origin: "India", grade: "Whole & Split", img: areca, tag: "Nuts" },
   { name: "Buffalo Meat", origin: "India", grade: "Halal Frozen", img: meat, tag: "Frozen" },
   { name: "100% Cotton Yarn", origin: "India", grade: "Combed Ring-Spun", img: cotton, tag: "Textile" },
 ];
 
 const stats = [
+  { v: 20, suffix: "+", label: "Product Categories" },
   { v: 15, suffix: "+", label: "Countries Served" },
-  { v: 13, suffix: "", label: "Product Categories" },
   { v: 99, suffix: "%", label: "On-Time Shipments" },
   { v: 100, suffix: "%", label: "Quality Inspection" },
 ];
+
 
 const features = [
   { icon: ShieldCheck, title: "International Quality", desc: "Compliance with ISO, HACCP, FSSAI, and destination-country standards on every shipment." },
@@ -103,9 +123,12 @@ function HomePage() {
     <div className="relative overflow-hidden">
       <PageLoader />
       <Hero />
+      <TrustBar />
       <About />
       <Products />
       <WhyUs />
+      <Industries />
+      <ExportProcess />
       <GlobalPresence />
       <Services />
       <FAQ />
@@ -113,6 +136,7 @@ function HomePage() {
     </div>
   );
 }
+
 
 function PageLoader() {
   const [done, setDone] = useState(false);
@@ -230,7 +254,7 @@ function Hero() {
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2, duration: 0.8 }}
             className="mt-7 max-w-xl text-[15px] sm:text-base font-light leading-relaxed text-foreground/75"
           >
-            MFS Global Industries is a trusted Indian export company supplying premium agricultural commodities, food products, paper products and industrial raw materials to buyers worldwide — with consistent quality, competitive pricing and reliable logistics.
+            MFS Global Industries is a trusted Indian export company specialising in premium spices, agricultural commodities, food products, tobacco, areca nuts and industrial raw materials — with consistent quality, competitive pricing and reliable logistics to buyers worldwide.
           </motion.p>
 
           <motion.div
@@ -261,8 +285,8 @@ function Hero() {
             className="mt-12 grid grid-cols-3 gap-6 max-w-md"
           >
             {[
+              { k: "20+", v: "Categories" },
               { k: "15+", v: "Countries" },
-              { k: "13", v: "Categories" },
               { k: "24h", v: "Quotation" },
             ].map((s) => (
               <div key={s.v}>
@@ -698,3 +722,130 @@ function CTA() {
     </section>
   );
 }
+
+/* ========= NEW SECTIONS ========= */
+
+const trustBadges = [
+  { code: "APEDA", label: "Agri Export" },
+  { code: "FSSAI", label: "Food Safety" },
+  { code: "IEC", label: "Import·Export" },
+  { code: "DGFT", label: "Ministry Reg." },
+  { code: "MSME", label: "Certified" },
+  { code: "ISO", label: "9001:2015" },
+  { code: "HACCP", label: "Compliant" },
+  { code: "SGS", label: "Inspected" },
+];
+
+function TrustBar() {
+  return (
+    <section className="relative py-14 border-y border-white/5">
+      <div className="mx-auto max-w-7xl px-6">
+        <Reveal>
+          <div className="text-center mb-8">
+            <div className="text-[10px] tracking-[0.35em] uppercase text-[var(--gold)]">Certified · Compliant · Verified</div>
+          </div>
+        </Reveal>
+        <div className="grid grid-cols-4 lg:grid-cols-8 gap-4">
+          {trustBadges.map((b, i) => (
+            <Reveal key={b.code} delay={i * 0.04}>
+              <div className="group rounded-2xl glass px-3 py-4 text-center transition hover:-translate-y-0.5">
+                <Certificate weight="light" size={22} className="mx-auto text-[var(--gold)]" />
+                <div className="mt-2 text-sm font-extrabold tracking-wider text-foreground">{b.code}</div>
+                <div className="text-[9px] tracking-[0.15em] uppercase text-muted-foreground mt-0.5">{b.label}</div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const industries = [
+  { icon: ForkKnife, name: "Food & Beverage", desc: "Restaurants, hotels, catering & FMCG brands sourcing premium ingredients." },
+  { icon: Storefront, name: "Retail & Distribution", desc: "Supermarkets, importers and wholesale distributors across five continents." },
+  { icon: Factory, name: "Food Processing", desc: "Mills, packagers and processors sourcing consistent bulk raw material." },
+  { icon: FirstAidKit, name: "Nutraceutical", desc: "Turmeric, spice extracts and grains for supplement & wellness brands." },
+  { icon: Buildings, name: "HoReCa", desc: "Hospitality chains with strict specification and volume commitments." },
+  { icon: Leaf, name: "Organic Trade", desc: "Certified organic buyers requiring traceable, farm-verified sourcing." },
+];
+
+function Industries() {
+  return (
+    <section id="industries" className="relative py-32">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <Reveal><SectionLabel>Industries We Serve</SectionLabel></Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="mt-5 text-4xl sm:text-5xl lg:text-6xl leading-[1.02]">
+              Trusted across <span className="text-terracotta-gradient italic">every vertical.</span>
+            </h2>
+          </Reveal>
+        </div>
+        <StaggerGroup className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {industries.map((it) => (
+            <StaggerItem key={it.name}>
+              <div className="group h-full rounded-3xl glass p-7 transition hover:-translate-y-1">
+                <div className="grid h-12 w-12 place-items-center rounded-2xl glass-strong">
+                  <it.icon weight="light" size={22} className="text-[var(--gold)]" />
+                </div>
+                <h3 className="mt-6 text-xl font-semibold">{it.name}</h3>
+                <p className="mt-3 text-sm font-light text-foreground/70 leading-relaxed">{it.desc}</p>
+              </div>
+            </StaggerItem>
+          ))}
+        </StaggerGroup>
+      </div>
+    </section>
+  );
+}
+
+const processSteps = [
+  { n: "01", title: "Inquiry", desc: "Share your product, grade, quantity and destination — we respond within 24 hours with a transparent quotation." },
+  { n: "02", title: "Sampling", desc: "Physical or courier samples with full specification sheet, origin and lab report where applicable." },
+  { n: "03", title: "Contract & Payment", desc: "Proforma invoice, sales contract and mutually agreed Incoterms with LC or TT payment terms." },
+  { n: "04", title: "Sourcing & QC", desc: "Direct-from-source procurement with in-house quality control and third-party inspection (SGS / Intertek)." },
+  { n: "05", title: "Documentation & Shipping", desc: "APEDA / Phyto / Health certificates, container booking and dispatch from Mundra, Nhava Sheva or Kolkata." },
+  { n: "06", title: "Delivered", desc: "Real-time tracking to your destination port with dedicated post-shipment support." },
+];
+
+function ExportProcess() {
+  return (
+    <section id="process" className="relative py-32">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <Reveal><SectionLabel>Export Process</SectionLabel></Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="mt-5 text-4xl sm:text-5xl lg:text-6xl leading-[1.02]">
+              From inquiry to <span className="text-terracotta-gradient italic">delivered container.</span>
+            </h2>
+          </Reveal>
+        </div>
+        <div className="relative">
+          <div className="absolute left-1/2 top-0 bottom-0 w-px hidden lg:block" style={{ background: "linear-gradient(180deg, transparent, var(--terracotta), transparent)" }} />
+          <div className="space-y-6">
+            {processSteps.map((s, i) => (
+              <Reveal key={s.n} delay={i * 0.05}>
+                <div className={`grid lg:grid-cols-2 gap-6 items-center ${i % 2 === 1 ? "lg:[direction:rtl]" : ""}`}>
+                  <div className={`rounded-3xl glass p-7 ${i % 2 === 1 ? "lg:[direction:ltr]" : ""}`}>
+                    <div className="flex items-center gap-4">
+                      <span className="grid place-items-center h-14 w-14 rounded-2xl text-lg font-extrabold text-[var(--ink)]" style={{ background: "var(--grad-gold)" }}>
+                        {s.n}
+                      </span>
+                      <h3 className="text-2xl font-semibold">{s.title}</h3>
+                    </div>
+                    <p className="mt-4 text-sm font-light text-foreground/75 leading-relaxed">{s.desc}</p>
+                  </div>
+                  <div className="hidden lg:flex justify-center">
+                    <div className="grid place-items-center h-4 w-4 rounded-full ring-4 ring-[var(--background)]" style={{ background: "var(--terracotta)" }} />
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
