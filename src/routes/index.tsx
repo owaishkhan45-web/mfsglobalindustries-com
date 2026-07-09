@@ -3,7 +3,8 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight, ArrowUpRight, Check, Plus, Minus, Globe, ShieldCheck, Truck,
-  CurrencyDollar, Headset,
+  CurrencyDollar, Headset, Certificate, Package, Leaf, Factory, Buildings,
+  ForkKnife, Storefront, FirstAidKit,
 } from "@phosphor-icons/react";
 
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/Reveal";
@@ -22,44 +23,63 @@ import meat from "@/assets/product-meat.jpg";
 import tobaccoLeaf from "@/assets/product-tobacco-leaf.jpg";
 import tobaccoGround from "@/assets/product-tobacco-ground.jpg";
 import areca from "@/assets/product-areca.jpg";
+import rice from "@/assets/product-rice.jpg";
+import wheat from "@/assets/product-wheat.jpg";
+import turmeric from "@/assets/product-turmeric.jpg";
+import cumin from "@/assets/product-cumin.jpg";
+import chilli from "@/assets/product-chilli.jpg";
+import mangoes from "@/assets/product-mangoes.jpg";
+import coriander from "@/assets/product-coriander.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "MFS Global Industries — Premium Indian Exports Worldwide" },
-      { name: "description", content: "Trusted Indian export company supplying premium agricultural commodities, food products, tobacco, areca nuts and industrial raw materials to buyers worldwide." },
+      { name: "description", content: "Trusted Indian export company supplying premium spices, agricultural commodities, food products, tobacco, areca nuts and industrial raw materials to buyers worldwide." },
       { property: "og:title", content: "MFS Global Industries — Premium Indian Exports" },
-      { property: "og:description", content: "Connecting Indian excellence with global markets." },
+      { property: "og:description", content: "Connecting Indian excellence with global markets — spices, grains, fruits, food & industrial exports." },
       { property: "og:image", content: cargo },
     ],
   }),
   component: HomePage,
 });
 
-const heroSlides = [bananas, chickpeas, tobaccoLeaf, maize, areca, ginger];
+const heroSlides = [bananas, turmeric, chilli, mangoes, chickpeas, rice, tobaccoLeaf, areca];
 
 const products = [
-  { name: "Fresh Bananas", origin: "India", grade: "Export Premium · Cavendish", img: bananas, tag: "Fresh" },
-  { name: "Kabuli Chickpeas", origin: "India", grade: "Export Grade A · 10–12mm", img: chickpeas, tag: "Pulses" },
-  { name: "Desi Chickpeas", origin: "India", grade: "Premium · Kala Chana", img: desiChickpeas, tag: "Pulses" },
-  { name: "Whole Leaf Tobacco", origin: "India", grade: "Sun-Cured FCV", img: tobaccoLeaf, tag: "Tobacco" },
-  { name: "Grinded Tobacco", origin: "India", grade: "Fine Cut · Export", img: tobaccoGround, tag: "Tobacco" },
-  { name: "Areca Nuts", origin: "India", grade: "Whole & Split", img: areca, tag: "Nuts" },
-  { name: "Fresh Ginger", origin: "India", grade: "Export Quality", img: ginger, tag: "Fresh" },
-  { name: "Fresh Garlic", origin: "India", grade: "Premium White", img: garlic, tag: "Fresh" },
-  { name: "Sesame Seeds", origin: "India", grade: "Natural 99.95%", img: sesame, tag: "Seeds" },
+  // Spices
+  { name: "Turmeric Powder", origin: "India", grade: "5% Curcumin · Erode", img: turmeric, tag: "Spices" },
+  { name: "Whole Red Chilli", origin: "India", grade: "Teja · Sannam", img: chilli, tag: "Spices" },
+  { name: "Cumin Seeds", origin: "India", grade: "Machine Cleaned 99%", img: cumin, tag: "Spices" },
+  { name: "Coriander Seeds", origin: "India", grade: "Eagle · Green", img: coriander, tag: "Spices" },
+  // Grains & Pulses
+  { name: "Basmati Rice", origin: "India", grade: "1121 Steam · Sella", img: rice, tag: "Grains" },
+  { name: "Indian Wheat", origin: "India", grade: "Sharbati · Milling", img: wheat, tag: "Grains" },
+  { name: "Kabuli Chickpeas", origin: "India", grade: "Grade A · 10–12mm", img: chickpeas, tag: "Pulses" },
+  { name: "Desi Chickpeas", origin: "India", grade: "Kala Chana", img: desiChickpeas, tag: "Pulses" },
   { name: "Premium Maize", origin: "India", grade: "Non-GMO Yellow", img: maize, tag: "Grains" },
   { name: "Non-GMO Soybeans", origin: "India", grade: "Export Grade", img: soybeans, tag: "Grains" },
+  { name: "Sesame Seeds", origin: "India", grade: "Natural 99.95%", img: sesame, tag: "Seeds" },
+  // Fresh
+  { name: "Alphonso Mangoes", origin: "India", grade: "Ratnagiri · Devgad", img: mangoes, tag: "Fresh" },
+  { name: "Cavendish Bananas", origin: "India", grade: "Export Premium", img: bananas, tag: "Fresh" },
+  { name: "Fresh Ginger", origin: "India", grade: "Export Quality", img: ginger, tag: "Fresh" },
+  { name: "Fresh Garlic", origin: "India", grade: "Premium White", img: garlic, tag: "Fresh" },
+  // Specialty
+  { name: "Whole Leaf Tobacco", origin: "India", grade: "Sun-Cured FCV", img: tobaccoLeaf, tag: "Tobacco" },
+  { name: "Ground Tobacco", origin: "India", grade: "Fine Cut · Export", img: tobaccoGround, tag: "Tobacco" },
+  { name: "Areca Nuts", origin: "India", grade: "Whole & Split", img: areca, tag: "Nuts" },
   { name: "Buffalo Meat", origin: "India", grade: "Halal Frozen", img: meat, tag: "Frozen" },
   { name: "100% Cotton Yarn", origin: "India", grade: "Combed Ring-Spun", img: cotton, tag: "Textile" },
 ];
 
 const stats = [
+  { v: 20, suffix: "+", label: "Product Categories" },
   { v: 15, suffix: "+", label: "Countries Served" },
-  { v: 13, suffix: "", label: "Product Categories" },
   { v: 99, suffix: "%", label: "On-Time Shipments" },
   { v: 100, suffix: "%", label: "Quality Inspection" },
 ];
+
 
 const features = [
   { icon: ShieldCheck, title: "International Quality", desc: "Compliance with ISO, HACCP, FSSAI, and destination-country standards on every shipment." },
@@ -103,9 +123,12 @@ function HomePage() {
     <div className="relative overflow-hidden">
       <PageLoader />
       <Hero />
+      <TrustBar />
       <About />
       <Products />
       <WhyUs />
+      <Industries />
+      <ExportProcess />
       <GlobalPresence />
       <Services />
       <FAQ />
@@ -113,6 +136,7 @@ function HomePage() {
     </div>
   );
 }
+
 
 function PageLoader() {
   const [done, setDone] = useState(false);
