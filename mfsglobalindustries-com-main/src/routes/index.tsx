@@ -3,7 +3,7 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight, ArrowUpRight, Check, Plus, Minus, Globe, ShieldCheck, Truck,
-  CurrencyDollar, Headset, Certificate, Leaf, Factory, Buildings,
+  CurrencyDollar, Headset, Certificate, Package, Leaf, Factory, Buildings,
   ForkKnife, Storefront, FirstAidKit,
 } from "@phosphor-icons/react";
 

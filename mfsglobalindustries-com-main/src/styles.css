@@ -1,0 +1,174 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-terracotta: var(--terracotta);
+  --color-charcoal: var(--charcoal);
+  --color-ink: var(--ink);
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 1rem;
+  /* Terracotta × Deep Charcoal luxury palette */
+  --background: oklch(0.15 0.008 40);      /* #171717 charcoal */
+  --foreground: oklch(0.97 0.008 80);      /* warm ivory */
+  --ink: oklch(0.11 0.008 40);
+  --charcoal: oklch(0.17 0.008 40);
+  --card: oklch(0.20 0.012 40 / 0.55);
+  --card-foreground: oklch(0.97 0.008 80);
+  --popover: oklch(0.18 0.010 40);
+  --popover-foreground: oklch(0.97 0.008 80);
+  --primary: oklch(0.60 0.14 42);           /* #B65A36 terracotta */
+  --primary-foreground: oklch(0.98 0.006 80);
+  --secondary: oklch(0.28 0.03 40);
+  --secondary-foreground: oklch(0.97 0.008 80);
+  --muted: oklch(0.24 0.015 40);
+  --muted-foreground: oklch(0.72 0.014 60);
+  --accent: oklch(0.78 0.10 60);            /* warm champagne */
+  --accent-foreground: oklch(0.11 0.008 40);
+  --destructive: oklch(0.58 0.22 27);
+  --destructive-foreground: oklch(0.97 0.008 80);
+  --border: oklch(1 0 0 / 0.08);
+  --input: oklch(1 0 0 / 0.12);
+  --ring: oklch(0.60 0.14 42);
+  --terracotta: oklch(0.60 0.14 42);
+  --gold: oklch(0.82 0.10 70);              /* champagne accent */
+  --gold-soft: oklch(0.88 0.07 75);
+
+  --grad-gold: linear-gradient(135deg, oklch(0.86 0.09 70) 0%, oklch(0.68 0.13 50) 100%);
+  --grad-terracotta: linear-gradient(135deg, oklch(0.66 0.15 42) 0%, oklch(0.42 0.10 38) 100%);
+  --grad-radial-gold: radial-gradient(circle at 30% 20%, oklch(0.60 0.14 42 / 0.28), transparent 60%);
+  --grad-hero:
+    radial-gradient(ellipse at 20% 0%, oklch(0.60 0.14 42 / 0.42), transparent 55%),
+    radial-gradient(ellipse at 80% 90%, oklch(0.35 0.10 38 / 0.35), transparent 60%),
+    radial-gradient(ellipse at 50% 50%, oklch(0.82 0.10 70 / 0.06), transparent 55%);
+  --shadow-glow: 0 0 60px -10px oklch(0.60 0.14 42 / 0.55);
+  --shadow-elegant: 0 30px 80px -30px oklch(0 0 0 / 0.6), 0 0 0 1px oklch(1 0 0 / 0.05);
+}
+
+.dark {
+  --background: oklch(0.15 0.008 40);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-background);
+    background-image:
+      radial-gradient(ellipse at 15% 0%, oklch(0.60 0.14 42 / 0.35), transparent 55%),
+      radial-gradient(ellipse at 85% 40%, oklch(0.42 0.11 38 / 0.22), transparent 55%),
+      radial-gradient(ellipse at 50% 100%, oklch(0.82 0.10 70 / 0.06), transparent 55%);
+    background-attachment: fixed;
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    cursor: none;
+    font-weight: 400;
+  }
+  body.no-custom-cursor { cursor: auto; }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.035em;
+    font-weight: 800;
+  }
+  ::selection {
+    background: oklch(0.60 0.14 42 / 0.4);
+    color: oklch(0.98 0.008 80);
+  }
+
+  /* Universal glow on hover */
+  a:hover, button:hover, [data-cursor="hover"]:hover {
+    box-shadow: 0 0 0 1px oklch(0.60 0.14 42 / 0.4), 0 0 32px -2px oklch(0.60 0.14 42 / 0.45);
+    transition: box-shadow 220ms ease;
+  }
+}
+
+@utility glass {
+  background: linear-gradient(135deg, oklch(1 0 0 / 0.055), oklch(1 0 0 / 0.02));
+  backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid oklch(1 0 0 / 0.08);
+}
+@utility glass-strong {
+  background: linear-gradient(135deg, oklch(1 0 0 / 0.085), oklch(1 0 0 / 0.03));
+  backdrop-filter: blur(28px) saturate(150%);
+  border: 1px solid oklch(1 0 0 / 0.10);
+}
+@utility text-gold-gradient {
+  background: linear-gradient(135deg, oklch(0.88 0.09 65), oklch(0.62 0.15 42));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@utility text-terracotta-gradient {
+  background: linear-gradient(135deg, oklch(0.72 0.16 45), oklch(0.48 0.12 38));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@utility hairline {
+  background: linear-gradient(90deg, transparent, oklch(0.60 0.14 42 / 0.55), transparent);
+  height: 1px;
+}
+@utility shimmer {
+  background: linear-gradient(110deg, transparent 30%, oklch(1 0 0 / 0.08) 50%, transparent 70%);
+  background-size: 200% 100%;
+  animation: shimmer-move 3s linear infinite;
+}
+
+@keyframes shimmer-move { to { background-position: -200% 0; } }
+@keyframes float-up {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 oklch(0.60 0.14 42 / 0.55); }
+  100% { box-shadow: 0 0 0 18px oklch(0.60 0.14 42 / 0); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes draw-path { to { stroke-dashoffset: 0; } }
+
+.animate-float { animation: float-up 6s ease-in-out infinite; }
+.animate-pulse-ring { animation: pulse-ring 2s ease-out infinite; }
+.animate-marquee { animation: marquee 40s linear infinite; }
