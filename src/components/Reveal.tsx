@@ -1,48 +1,12 @@
-// Reveal.tsx — scroll-reveal wrapper (no framer-motion)
-import { useEffect, useRef, useState } from 'react';
-
-type RevealProps = {
-  children: any;
-  delay?: number;
-  direction?: 'up' | 'left' | 'right' | 'scale';
-  className?: string;
-  style?: any;
-};
-
-export default function Reveal({ children, delay = 0, direction = 'up', className = '', style = {} }: RevealProps) {
+﻿import { useEffect, useRef, useState } from "react";
+export default function Reveal({ children, delay=0, direction="up", className="", style={} }: any) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
+  const [v, setV] = useState(false);
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
-      { threshold: 0.1 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
+    const el = ref.current; if (!el) return;
+    const obs = new IntersectionObserver(([e]) => { if(e.isIntersecting){setV(true);obs.disconnect();} },{threshold:0.1});
+    obs.observe(el); return () => obs.disconnect();
   }, []);
-
-  const transforms: Record<string, string> = {
-    up: 'translateY(40px)',
-    left: 'translateX(-40px)',
-    right: 'translateX(40px)',
-    scale: 'scale(0.92)',
-  };
-
-  return (
-    <div
-      ref={ref}
-      className={className}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'none' : transforms[direction],
-        transition: `opacity 0.8s cubic-bezier(.16,1,.3,1) ${delay}ms, transform 0.8s cubic-bezier(.16,1,.3,1) ${delay}ms`,
-        ...style,
-      }}
-    >
-      {children}
-    </div>
-  );
+  const t: any = {up:"translateY(40px)",left:"translateX(-40px)",right:"translateX(40px)",scale:"scale(0.92)"};
+  return <div ref={ref} className={className} style={{opacity:v?1:0,transform:v?"none":t[direction],transition:`opacity .8s ease ${delay}ms,transform .8s ease ${delay}ms`,...style}}>{children}</div>;
 }
