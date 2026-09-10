@@ -1,3 +1,10 @@
-import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+﻿import { defineConfig } from 'vite'
+import { TanStackStartPlugin } from '@tanstack/start-plugin-core'
 
-export default defineConfig({});
+export default defineConfig({
+  plugins: [TanStackStartPlugin()],
+  build: {
+    outDir: 'dist',
+    emptyOutDir: true,
+  }
+})

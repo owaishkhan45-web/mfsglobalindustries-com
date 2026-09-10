@@ -1,13 +1,21 @@
 ﻿{
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": { "buildCommand": "npm run build" }
-    }
-  ],
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
-  ]
+    "builds":  [
+                   {
+                       "config":  {
+                                      "distDir":  "dist",
+                                      "buildCommand":  "npm run build"
+                                  },
+                       "use":  "@vercel/static-build",
+                       "src":  "package.json"
+                   }
+               ],
+    "routes":  [
+                   {
+                       "handle":  "filesystem"
+                   },
+                   {
+                       "src":  "/(.*)",
+                       "dest":  "/index.html"
+                   }
+               ]
 }
