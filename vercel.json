@@ -1,16 +1,21 @@
 ﻿{
   "version": 2,
+  "builds": [{ "src": "package.json", "use": "@vercel/next" }]
+}
+' | Out-File -FilePath "vercel.json" -Encoding UTF8
+
+git add -A
+git commit -m "FULL FIX: Logo + config + path"
+git push
+Get-Content .\vercel.json
+
+@'
+{
+  "version": 2,
   "builds": [
     {
       "src": "package.json",
       "use": "@vercel/next"
     }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/"
-    }
   ]
 }
-
