@@ -1,234 +1,203 @@
-import { Link } from '@tanstack/react-router';
 import { useState, useEffect, useRef } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { List, X, CaretDown, Globe, ArrowUpRight } from '@phosphor-icons/react';
-import { useLanguage, type Lang } from '@/contexts/LanguageContext';
-import logo from '@/assets/mfs-logo.asset.json';
+import { Link, useRouterState } from '@tanstack/react-router';
 
-const FLAG: Record<Lang, string> = { en: '🇬🇧', ar: '🇸🇦', fr: '🇫🇷', es: '🇪🇸' };
+const LANGS = [
+  { code: 'EN', label: 'English', flag: '🇬🇧' },
+  { code: 'AR', label: 'العربية', flag: '🇸🇦' },
+  { code: 'FR', label: 'Français', flag: '🇫🇷' },
+  { code: 'ES', label: 'Español', flag: '🇪🇸' },
+];
+
+const NAV_LINKS = [
+  { to: '/', label: 'Home' },
+  { to: '/products', label: 'Products' },
+  { to: '/', label: 'Why Us', hash: '#why-us' },
+  { to: '/', label: 'Services', hash: '#services' },
+  { to: '/contact', label: 'Contact' },
+];
 
 export default function SiteNav() {
-  const { t, lang, setLang } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+  const [lang, setLang] = useState(LANGS[0]);
   const langRef = useRef<HTMLDivElement>(null);
+  const router = useRouterState();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
+    const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [mobileOpen]);
-
-  // Close lang dropdown on outside click
-  useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (langRef.current && !langRef.current.contains(e.target as Node)) {
-        setLangOpen(false);
-      }
+      if (langRef.current && !langRef.current.contains(e.target as Node)) setLangOpen(false);
     };
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
-  const navLinks = [
-    { label: t.nav.home, href: '/' },
-    { label: t.nav.products, href: '/#products' },
-    { label: t.nav.whyUs, href: '/#why-us' },
-    { label: t.nav.services, href: '/#services' },
-    { label: t.nav.contact, href: '/contact' },
-  ];
+  useEffect(() => { setMenuOpen(false); }, [router.location.pathname]);
 
-  const langs: Lang[] = ['en', 'ar', 'fr', 'es'];
+  const navBg = scrolled
+    ? 'rgba(27,43,75,0.97)'
+    : 'linear-gradient(180deg,rgba(27,43,75,0.85) 0%,rgba(27,43,75,0) 100%)';
 
   return (
     <>
-      <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-          scrolled ? 'glass-nav shadow-sm' : 'bg-transparent'
-        }`}
-      >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 sm:px-8 h-16 sm:h-[70px]">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 shrink-0 group">
-            <div className="relative h-10 w-10 rounded-xl overflow-hidden ring-2 ring-[#C4962A]/20 group-hover:ring-[#C4962A]/50 transition">
-              <img src={logo.url} alt="MFS Global" className="h-full w-full object-cover" />
+      <style>{`
+        .snav-link { color:rgba(255,255,255,.85); text-decoration:none; font-size:.88rem;
+          font-weight:500; padding:.3rem .1rem; position:relative; transition:color .2s; letter-spacing:.01em; }
+        .snav-link::after { content:''; position:absolute; bottom:-2px; left:0; width:0;
+          height:2px; background:#C4962A; border-radius:2px; transition:width .25s; }
+        .snav-link:hover,.snav-link.active { color:#C4962A; }
+        .snav-link:hover::after,.snav-link.active::after { width:100%; }
+        .snav-quote { display:inline-flex; align-items:center; gap:.4rem;
+          padding:.5rem 1.25rem; border-radius:999px; font-size:.82rem; font-weight:700;
+          text-decoration:none; letter-spacing:.02em;
+          background:linear-gradient(135deg,#C4962A,#A67820);
+          color:white; box-shadow:0 4px 18px rgba(196,150,42,.4);
+          transition:transform .2s,box-shadow .2s; border:none; cursor:pointer; }
+        .snav-quote:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(196,150,42,.5); }
+        @media(max-width:860px) { .snav-desktop { display:none!important; } .snav-hamburger { display:flex!important; } }
+        @media(min-width:861px) { .snav-hamburger { display:none!important; } .snav-desktop { display:flex!important; } }
+      `}</style>
+
+      <nav style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
+        background: scrolled ? 'rgba(27,43,75,0.97)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(18px)' : 'none',
+        WebkitBackdropFilter: scrolled ? 'blur(18px)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(196,150,42,.2)' : 'none',
+        boxShadow: scrolled ? '0 4px 40px rgba(0,0,0,.3)' : 'none',
+        transition: 'background .3s, backdrop-filter .3s, border-color .3s, box-shadow .3s',
+        padding: '0 1.5rem',
+      }}>
+        <div style={{ maxWidth:'72rem', margin:'0 auto', height:68,
+          display:'flex', alignItems:'center', justifyContent:'space-between', gap:'1rem' }}>
+
+          {/* LOGO */}
+          <Link to="/" style={{ textDecoration:'none', display:'flex', alignItems:'center', gap:'.55rem', flexShrink:0 }}>
+            <div style={{ width:38, height:38, borderRadius:10,
+              background:'linear-gradient(135deg,#C4962A,#8B6914)',
+              display:'flex', alignItems:'center', justifyContent:'center',
+              boxShadow:'0 4px 14px rgba(196,150,42,.5)', flexShrink:0 }}>
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 2L13.5 7.5H19.5L14.8 11.2L16.7 17L11 13.5L5.3 17L7.2 11.2L2.5 7.5H8.5L11 2Z" fill="white" />
+              </svg>
             </div>
-            <div className="leading-tight hidden sm:block">
-              <p className="text-[13px] font-bold tracking-[0.12em] text-[#1B2B4B] uppercase">MFS Global</p>
-              <p className="text-[10px] tracking-[0.2em] text-[#7A7268] uppercase">Industries</p>
+            <div>
+              <div style={{ fontFamily:'Playfair Display,Georgia,serif', fontSize:'1rem',
+                fontWeight:700, color:'white', lineHeight:1.1, letterSpacing:'.01em' }}>MFS Global</div>
+              <div style={{ fontSize:'.6rem', color:'#C4962A', letterSpacing:'.08em',
+                textTransform:'uppercase', fontWeight:600 }}>Industries</div>
             </div>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-1">
-            {navLinks.map(link => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="relative px-4 py-2 text-[14px] font-medium text-[#3A3630] hover:text-[#C4962A] transition-colors duration-200 group"
-              >
+          {/* DESKTOP NAV */}
+          <div className="snav-desktop" style={{ alignItems:'center', gap:'1.75rem' }}>
+            {NAV_LINKS.map(link => (
+              <a key={link.label}
+                href={link.hash ? `${link.to}${link.hash}` : link.to}
+                className={`snav-link${router.location.pathname === link.to && !link.hash ? ' active' : ''}`}>
                 {link.label}
-                <span className="absolute bottom-1 left-4 right-4 h-[2px] scale-x-0 origin-left bg-[#C4962A] rounded-full transition-transform duration-300 group-hover:scale-x-100" />
               </a>
             ))}
-          </nav>
-
-          {/* Right side */}
-          <div className="flex items-center gap-2 shrink-0">
-            {/* Language Switcher */}
-            <div ref={langRef} className="relative hidden md:block">
-              <button
-                onClick={() => setLangOpen(v => !v)}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-[13px] font-medium text-[#3A3630] hover:bg-[#F0EDE6] transition border border-[#E5E1D8]"
-              >
-                <Globe weight="regular" size={15} className="text-[#C4962A]" />
-                <span>{FLAG[lang]}</span>
-                <span className="hidden sm:inline">{t.languages[lang]}</span>
-                <CaretDown
-                  weight="bold"
-                  size={11}
-                  className={`text-[#7A7268] transition-transform duration-200 ${langOpen ? 'rotate-180' : ''}`}
-                />
-              </button>
-              <AnimatePresence>
-                {langOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -6, scale: 0.97 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -6, scale: 0.97 }}
-                    transition={{ duration: 0.18 }}
-                    className="absolute right-0 mt-2 w-44 rounded-2xl bg-white border border-[#E5E1D8] shadow-lg overflow-hidden z-50"
-                  >
-                    {langs.map(l => (
-                      <button
-                        key={l}
-                        onClick={() => { setLang(l); setLangOpen(false); }}
-                        className={`w-full flex items-center gap-3 px-4 py-2.5 text-[13px] text-left hover:bg-[#F8F5EE] transition ${
-                          lang === l ? 'text-[#C4962A] font-semibold bg-[#FDF8EE]' : 'text-[#3A3630]'
-                        }`}
-                      >
-                        <span className="text-base">{FLAG[l]}</span>
-                        <span>{t.languages[l]}</span>
-                        {lang === l && <span className="ml-auto text-[#C4962A] text-xs">✓</span>}
-                      </button>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* CTA */}
-            <Link
-              to="/contact"
-              className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-[13px] font-semibold text-white btn-primary"
-            >
-              {t.nav.getQuote}
-              <ArrowUpRight weight="bold" size={14} />
-            </Link>
-
-            {/* Mobile menu button */}
-            <button
-              onClick={() => setMobileOpen(true)}
-              className="lg:hidden flex items-center justify-center w-10 h-10 rounded-xl border border-[#E5E1D8] bg-white/70 text-[#1B2B4B] hover:bg-[#F0EDE6] transition"
-              aria-label="Open menu"
-            >
-              <List weight="bold" size={20} />
-            </button>
           </div>
-        </div>
-      </header>
 
-      {/* Mobile Drawer */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] lg:hidden"
-          >
-            <div
-              className="absolute inset-0 bg-black/30 backdrop-blur-sm"
-              onClick={() => setMobileOpen(false)}
-            />
-            <motion.aside
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 28, stiffness: 260 }}
-              className="absolute right-0 top-0 h-full w-[84%] max-w-sm bg-white shadow-2xl flex flex-col"
-            >
-              {/* Header */}
-              <div className="flex items-center justify-between px-5 py-4 border-b border-[#E5E1D8]">
-                <div className="flex items-center gap-2.5">
-                  <div className="h-9 w-9 rounded-lg overflow-hidden">
-                    <img src={logo.url} alt="MFS" className="h-full w-full object-cover" />
-                  </div>
-                  <span className="font-bold text-[#1B2B4B] tracking-wide">MFS Global</span>
-                </div>
-                <button
-                  onClick={() => setMobileOpen(false)}
-                  className="flex items-center justify-center w-9 h-9 rounded-xl bg-[#F0EDE6] text-[#3A3630]"
-                >
-                  <X weight="bold" size={18} />
-                </button>
-              </div>
-
-              {/* Links */}
-              <nav className="flex-1 overflow-y-auto px-4 py-6 space-y-1">
-                {navLinks.map((link, i) => (
-                  <motion.a
-                    key={link.label}
-                    href={link.href}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.06 }}
-                    onClick={() => setMobileOpen(false)}
-                    className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-[15px] font-medium text-[#1A1714] hover:bg-[#F8F5EE] hover:text-[#C4962A] transition group"
-                  >
-                    <span className="flex-1">{link.label}</span>
-                    <ArrowUpRight weight="bold" size={15} className="text-[#C4962A] opacity-0 group-hover:opacity-100 transition" />
-                  </motion.a>
-                ))}
-              </nav>
-
-              {/* Language + CTA */}
-              <div className="px-4 pb-6 space-y-3 border-t border-[#E5E1D8] pt-4">
-                <div className="grid grid-cols-4 gap-2">
-                  {langs.map(l => (
-                    <button
-                      key={l}
-                      onClick={() => setLang(l)}
-                      className={`flex flex-col items-center gap-1 py-2 rounded-xl text-xs font-medium transition ${
-                        lang === l
-                          ? 'bg-[#FDF8EE] text-[#C4962A] ring-2 ring-[#C4962A]/30'
-                          : 'bg-[#F0EDE6] text-[#7A7268] hover:bg-[#E8E4DC]'
-                      }`}
-                    >
-                      <span className="text-xl">{FLAG[l]}</span>
-                      <span>{l.toUpperCase()}</span>
+          {/* RIGHT SIDE */}
+          <div className="snav-desktop" style={{ alignItems:'center', gap:'.75rem' }}>
+            {/* Language picker */}
+            <div ref={langRef} style={{ position:'relative' }}>
+              <button onClick={() => setLangOpen(p => !p)} style={{
+                display:'flex', alignItems:'center', gap:'.35rem',
+                padding:'.35rem .75rem', borderRadius:999, cursor:'pointer',
+                background:'rgba(255,255,255,.1)', border:'1px solid rgba(255,255,255,.2)',
+                color:'rgba(255,255,255,.9)', fontSize:'.8rem', fontWeight:500,
+                transition:'background .2s',
+              }}>
+                <span>{lang.flag}</span>
+                <span>{lang.code}</span>
+                <span style={{ fontSize:'.65rem', opacity:.7 }}>{langOpen ? '▲' : '▼'}</span>
+              </button>
+              {langOpen && (
+                <div style={{
+                  position:'absolute', top:'calc(100% + .5rem)', right:0, minWidth:140,
+                  background:'rgba(27,43,75,.97)', border:'1px solid rgba(196,150,42,.25)',
+                  borderRadius:12, overflow:'hidden', boxShadow:'0 12px 40px rgba(0,0,0,.4)',
+                  backdropFilter:'blur(20px)',
+                }}>
+                  {LANGS.map(l => (
+                    <button key={l.code} onClick={() => { setLang(l); setLangOpen(false); }}
+                      style={{
+                        width:'100%', display:'flex', alignItems:'center', gap:'.6rem',
+                        padding:'.65rem 1rem', background: l.code === lang.code ? 'rgba(196,150,42,.15)' : 'transparent',
+                        border:'none', cursor:'pointer', color: l.code === lang.code ? '#C4962A' : 'rgba(255,255,255,.85)',
+                        fontSize:'.82rem', fontWeight: l.code === lang.code ? 600 : 400,
+                        transition:'background .15s',
+                      }}>
+                      <span>{l.flag}</span><span>{l.label}</span>
                     </button>
                   ))}
                 </div>
-                <Link
-                  to="/contact"
-                  onClick={() => setMobileOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl text-[14px] font-semibold text-white btn-primary"
-                >
-                  {t.nav.getQuote} <ArrowUpRight weight="bold" size={15} />
-                </Link>
-              </div>
-            </motion.aside>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              )}
+            </div>
+
+            <Link to="/contact" className="snav-quote">Get a Quote ↗</Link>
+          </div>
+
+          {/* HAMBURGER */}
+          <button className="snav-hamburger" onClick={() => setMenuOpen(p => !p)}
+            style={{ background:'rgba(255,255,255,.1)', border:'1px solid rgba(255,255,255,.2)',
+              borderRadius:8, width:40, height:40, cursor:'pointer', color:'white', fontSize:'1.1rem',
+              flexDirection:'column', alignItems:'center', justifyContent:'center', gap:5,
+              transition:'background .2s', padding:0 }}>
+            <div style={{ width:18, height:2, background:'white', borderRadius:2,
+              transform: menuOpen ? 'rotate(45deg) translate(5px,5px)' : 'none', transition:'transform .25s' }} />
+            <div style={{ width:18, height:2, background:'white', borderRadius:2,
+              opacity: menuOpen ? 0 : 1, transition:'opacity .25s' }} />
+            <div style={{ width:18, height:2, background:'white', borderRadius:2,
+              transform: menuOpen ? 'rotate(-45deg) translate(5px,-5px)' : 'none', transition:'transform .25s' }} />
+          </button>
+        </div>
+
+        {/* MOBILE MENU */}
+        <div style={{
+          maxHeight: menuOpen ? '400px' : '0', overflow:'hidden',
+          transition:'max-height .35s ease', background:'rgba(27,43,75,.98)',
+          borderTop: menuOpen ? '1px solid rgba(196,150,42,.15)' : 'none',
+        }}>
+          <div style={{ padding:'1rem 1.5rem', display:'flex', flexDirection:'column', gap:'.25rem' }}>
+            {NAV_LINKS.map(link => (
+              <a key={link.label}
+                href={link.hash ? `${link.to}${link.hash}` : link.to}
+                style={{ padding:'.75rem .5rem', color:'rgba(255,255,255,.85)', textDecoration:'none',
+                  fontSize:'.9rem', fontWeight:500, borderBottom:'1px solid rgba(255,255,255,.06)',
+                  display:'block' }}>
+                {link.label}
+              </a>
+            ))}
+            <div style={{ marginTop:'1rem', display:'flex', alignItems:'center', gap:'1rem' }}>
+              {LANGS.map(l => (
+                <button key={l.code} onClick={() => setLang(l)}
+                  style={{ background: l.code === lang.code ? 'rgba(196,150,42,.2)' : 'rgba(255,255,255,.07)',
+                    border: l.code === lang.code ? '1px solid rgba(196,150,42,.5)' : '1px solid rgba(255,255,255,.15)',
+                    color: l.code === lang.code ? '#C4962A' : 'rgba(255,255,255,.7)',
+                    padding:'.3rem .65rem', borderRadius:999, fontSize:'.75rem', cursor:'pointer',
+                    fontWeight: l.code === lang.code ? 700 : 400 }}>
+                  {l.flag} {l.code}
+                </button>
+              ))}
+            </div>
+            <Link to="/contact" style={{ marginTop:'.75rem', textAlign:'center',
+              padding:'.875rem', borderRadius:999, background:'linear-gradient(135deg,#C4962A,#A67820)',
+              color:'white', fontWeight:700, fontSize:'.9rem', textDecoration:'none' }}>
+              Get a Quote ↗
+            </Link>
+          </div>
+        </div>
+      </nav>
     </>
   );
 }

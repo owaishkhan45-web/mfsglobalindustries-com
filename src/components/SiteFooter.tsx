@@ -1,142 +1,128 @@
 import { Link } from '@tanstack/react-router';
-import { EnvelopeSimple, WhatsappLogo, LinkedinLogo, InstagramLogo, FacebookLogo, MapPin, ArrowRight } from '@phosphor-icons/react';
-import { useLanguage } from '@/contexts/LanguageContext';
-import logo from '@/assets/mfs-logo.asset.json';
 
 export default function SiteFooter() {
-  const { t } = useLanguage();
-
-  const quickLinks = [
-    { label: t.nav.home, href: '/' },
-    { label: t.nav.products, href: '/#products' },
-    { label: t.nav.whyUs, href: '/#why-us' },
-    { label: t.nav.services, href: '/#services' },
-    { label: t.nav.contact, href: '/contact' },
-  ];
-
-  const products = [
-    'Kabuli Chickpeas', 'Fresh Bananas', 'Whole Leaf Tobacco',
-    'Areca Nuts', 'Sesame & Maize', 'Buffalo Meat',
-  ];
-
-  const socials = [
-    { icon: LinkedinLogo, href: '#', label: 'LinkedIn' },
-    { icon: InstagramLogo, href: '#', label: 'Instagram' },
-    { icon: FacebookLogo, href: '#', label: 'Facebook' },
-    { icon: WhatsappLogo, href: 'https://wa.me/916266316279', label: 'WhatsApp' },
-  ];
-
   return (
-    <footer className="bg-[#1B2B4B] text-white">
-      {/* Main footer */}
-      <div className="mx-auto max-w-7xl px-6 pt-16 pb-10">
-        <div className="grid gap-10 lg:grid-cols-[1.6fr_1fr_1.2fr_1.4fr]">
-          {/* Brand column */}
-          <div>
-            <div className="flex items-center gap-3 mb-5">
-              <div className="h-11 w-11 rounded-xl overflow-hidden ring-2 ring-white/10">
-                <img src={logo.url} alt="MFS Global" className="h-full w-full object-cover" />
+    <footer style={{
+      background: 'linear-gradient(180deg,#1B2B4B 0%,#0F1E35 100%)',
+      borderTop: '1px solid rgba(196,150,42,.2)',
+      padding: '4rem 1.5rem 2rem',
+      color: 'rgba(255,255,255,.75)',
+      fontFamily: 'Inter,system-ui,sans-serif',
+    }}>
+      <div style={{ maxWidth:'72rem', margin:'0 auto' }}>
+
+        {/* TOP GRID */}
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))',
+          gap:'3rem', marginBottom:'3rem' }}>
+
+          {/* BRAND */}
+          <div style={{ gridColumn:'span 1' }}>
+            <div style={{ display:'flex', alignItems:'center', gap:'.6rem', marginBottom:'1rem' }}>
+              <div style={{ width:38, height:38, borderRadius:10,
+                background:'linear-gradient(135deg,#C4962A,#8B6914)',
+                display:'flex', alignItems:'center', justifyContent:'center',
+                boxShadow:'0 4px 14px rgba(196,150,42,.4)', flexShrink:0 }}>
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                  <path d="M11 2L13.5 7.5H19.5L14.8 11.2L16.7 17L11 13.5L5.3 17L7.2 11.2L2.5 7.5H8.5L11 2Z" fill="white" />
+                </svg>
               </div>
               <div>
-                <p className="font-bold tracking-wider text-white">MFS Global Industries</p>
-                <p className="text-xs text-white/50 tracking-widest uppercase">Premium Exporter</p>
+                <div style={{ fontFamily:'Playfair Display,Georgia,serif', fontSize:'1rem',
+                  fontWeight:700, color:'white', lineHeight:1.1 }}>MFS Global</div>
+                <div style={{ fontSize:'.6rem', color:'#C4962A', letterSpacing:'.08em', textTransform:'uppercase', fontWeight:600 }}>Industries</div>
               </div>
             </div>
-            <p className="text-sm text-white/65 leading-relaxed max-w-xs mb-6">
-              {t.footer.tagline} Connecting India’s finest produce with buyers across 40+ nations since 2018.
+            <p style={{ fontSize:'.85rem', lineHeight:1.75, color:'rgba(255,255,255,.6)', marginBottom:'1.25rem', maxWidth:'18rem' }}>
+              Premium agricultural commodities exported from the heart of India. Connecting India's finest produce with buyers across 40+ nations.
             </p>
-            <div className="flex items-center gap-2">
-              {socials.map(({ icon: Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="flex items-center justify-center w-9 h-9 rounded-xl bg-white/8 hover:bg-[#C4962A]/20 hover:text-[#C4962A] transition text-white/70"
-                >
-                  <Icon weight="fill" size={17} />
+            {/* Social icons */}
+            <div style={{ display:'flex', gap:'.6rem' }}>
+              {[
+                { href:'#', label:'LinkedIn', svg:'<path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/>' },
+                { href:'#', label:'X/Twitter', svg:'<path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>' },
+                { href:'https://wa.me/916266316279', label:'WhatsApp', svg:'<path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/>' },
+              ].map(s => (
+                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
+                  style={{ width:34, height:34, borderRadius:8, display:'flex', alignItems:'center',
+                    justifyContent:'center', background:'rgba(255,255,255,.07)',
+                    border:'1px solid rgba(255,255,255,.12)', color:'rgba(255,255,255,.7)',
+                    transition:'background .2s, color .2s', textDecoration:'none' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background='rgba(196,150,42,.2)'; (e.currentTarget as HTMLElement).style.color='#C4962A'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background='rgba(255,255,255,.07)'; (e.currentTarget as HTMLElement).style.color='rgba(255,255,255,.7)'; }}>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                    dangerouslySetInnerHTML={{ __html: s.svg }} />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* QUICK LINKS */}
           <div>
-            <h4 className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/40 mb-5">{t.footer.quickLinks}</h4>
-            <ul className="space-y-2.5">
-              {quickLinks.map(link => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="flex items-center gap-2 text-sm text-white/70 hover:text-[#C4962A] transition group"
-                  >
-                    <ArrowRight weight="bold" size={12} className="opacity-0 group-hover:opacity-100 transition" />
-                    {link.label}
+            <h4 style={{ color:'white', fontWeight:700, fontSize:'.8rem', letterSpacing:'.1em',
+              textTransform:'uppercase', marginBottom:'1.25rem' }}>Quick Links</h4>
+            <ul style={{ listStyle:'none', padding:0, margin:0, display:'flex', flexDirection:'column', gap:'.6rem' }}>
+              {[['Home','/'],['Products','/products'],['Why Us','/#why-us'],['Services','/#services'],['Contact','/contact']].map(([label,href]) => (
+                <li key={label}>
+                  <a href={href} style={{ color:'rgba(255,255,255,.65)', textDecoration:'none',
+                    fontSize:'.88rem', display:'flex', alignItems:'center', gap:'.4rem',
+                    transition:'color .2s' }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color='#C4962A'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color='rgba(255,255,255,.65)'; }}>
+                    <span style={{ color:'#C4962A', fontSize:'.75rem' }}>→</span>{label}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Products */}
+          {/* PRODUCTS */}
           <div>
-            <h4 className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/40 mb-5">{t.footer.products}</h4>
-            <ul className="space-y-2.5">
-              {products.map(p => (
+            <h4 style={{ color:'white', fontWeight:700, fontSize:'.8rem', letterSpacing:'.1em',
+              textTransform:'uppercase', marginBottom:'1.25rem' }}>Products</h4>
+            <ul style={{ listStyle:'none', padding:0, margin:0, display:'flex', flexDirection:'column', gap:'.6rem' }}>
+              {['Kabuli Chickpeas','Fresh Bananas','Whole Leaf Tobacco','Areca Nuts','Sesame & Maize','Buffalo Meat'].map(p => (
                 <li key={p}>
-                  <a href="/#products" className="flex items-center gap-2 text-sm text-white/70 hover:text-[#C4962A] transition group">
-                    <ArrowRight weight="bold" size={12} className="opacity-0 group-hover:opacity-100 transition" />
-                    {p}
+                  <a href="/products" style={{ color:'rgba(255,255,255,.65)', textDecoration:'none',
+                    fontSize:'.88rem', display:'flex', alignItems:'center', gap:'.4rem', transition:'color .2s' }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color='#C4962A'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color='rgba(255,255,255,.65)'; }}>
+                    <span style={{ color:'#C4962A', fontSize:'.75rem' }}>→</span>{p}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* CONTACT */}
           <div>
-            <h4 className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/40 mb-5">{t.footer.contact}</h4>
-            <ul className="space-y-4">
-              <li>
-                <a href="mailto:exports@mfsglobalindustries.com" className="flex items-start gap-3 text-sm text-white/70 hover:text-[#C4962A] transition">
-                  <EnvelopeSimple weight="fill" size={16} className="mt-0.5 shrink-0 text-[#C4962A]" />
-                  <span>exports@mfsglobalindustries.com</span>
+            <h4 style={{ color:'white', fontWeight:700, fontSize:'.8rem', letterSpacing:'.1em',
+              textTransform:'uppercase', marginBottom:'1.25rem' }}>Contact</h4>
+            <div style={{ display:'flex', flexDirection:'column', gap:'.9rem' }}>
+              {[
+                { icon:'📧', label:'exports@mfsglobalindustries.com', href:'mailto:exports@mfsglobalindustries.com' },
+                { icon:'📱', label:'+91 62663 16279', href:'https://wa.me/916266316279' },
+                { icon:'📍', label:'Madhya Pradesh, India', href:'#' },
+              ].map(c => (
+                <a key={c.label} href={c.href} target="_blank" rel="noopener noreferrer"
+                  style={{ display:'flex', alignItems:'flex-start', gap:'.6rem',
+                    color:'rgba(255,255,255,.65)', textDecoration:'none', fontSize:'.86rem',
+                    lineHeight:1.5, transition:'color .2s' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color='#C4962A'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color='rgba(255,255,255,.65)'; }}>
+                  <span style={{ flexShrink:0 }}>{c.icon}</span>{c.label}
                 </a>
-              </li>
-              <li>
-                <a href="https://wa.me/916266316279" className="flex items-center gap-3 text-sm text-white/70 hover:text-[#C4962A] transition">
-                  <WhatsappLogo weight="fill" size={16} className="shrink-0 text-[#C4962A]" />
-                  <span>+91 62663 16279</span>
-                </a>
-              </li>
-              <li>
-                <div className="flex items-start gap-3 text-sm text-white/70">
-                  <MapPin weight="fill" size={16} className="mt-0.5 shrink-0 text-[#C4962A]" />
-                  <span>Madhya Pradesh, India</span>
-                </div>
-              </li>
-            </ul>
-
-            {/* Mini CTA */}
-            <Link
-              to="/contact"
-              className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white btn-primary"
-            >
-              {t.nav.getQuote}
-            </Link>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-white/8 mx-6">
-        <div className="mx-auto max-w-7xl py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/40">
-          <p>© {new Date().getFullYear()} MFS Global Industries. {t.footer.rights}</p>
-          <div className="flex items-center gap-5">
-            <a href="#" className="hover:text-white/70 transition">{t.footer.privacy}</a>
-            <a href="#" className="hover:text-white/70 transition">{t.footer.terms}</a>
-          </div>
+        {/* BOTTOM */}
+        <div style={{ borderTop:'1px solid rgba(255,255,255,.08)', paddingTop:'1.75rem',
+          display:'flex', flexWrap:'wrap', alignItems:'center', justifyContent:'space-between',
+          gap:'1rem', fontSize:'.8rem', color:'rgba(255,255,255,.4)' }}>
+          <p style={{ margin:0 }}>&copy; {new Date().getFullYear()} MFS Global Industries. All rights reserved.</p>
+          <p style={{ margin:0 }}>Made with ♥ in India &nbsp;|&nbsp; <span style={{ color:'rgba(196,150,42,.6)' }}>Premium Agricultural Exports</span></p>
         </div>
       </div>
     </footer>
