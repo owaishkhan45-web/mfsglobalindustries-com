@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 
 export const SiteNav = () => {
   return (
@@ -11,7 +11,7 @@ export const SiteNav = () => {
       borderBottom: '1px solid #C4962A'
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        <img src="/logo.jpeg" alt="MFS Logo" style={{ height: '50px', width: 'auto' }} 
+        <img src="/logo.webp" alt="MFS Logo" style={{ height: '50px', width: 'auto' }} 
              onError={(e) => { e.target.style.display='none'; document.getElementById('txt-logo').style.display='block'; }} />
         <span id="txt-logo" style={{ display: 'none', fontFamily: 'Playfair Display', fontSize: '1.5rem', fontWeight: 'bold', color: '#C4962A' }}>MFS Global</span>
       </div>
@@ -23,3 +23,5 @@ export const SiteNav = () => {
     </nav>
   );
 };
+
+
