@@ -1,15 +1,15 @@
 ﻿// src/routes/index.tsx
 import { Link } from '@tanstack/react-router';
-import { SiteNav } from '../components/SiteNav';
 
 const products = [
-  { name: 'Kabuli Chickpeas', origin: 'Rajasthan', cert: 'APEDA', img: '/chickpeas.jpg' },
-  { name: 'Fresh Bananas', origin: 'Maharashtra', cert: 'Phyto', img: '/bananas.jpg' },
-  { name: 'Whole Leaf Tobacco', origin: 'Andhra Pradesh', cert: 'TB', img: '/tobacco.jpg' },
-  { name: 'Areca Nuts', origin: 'Karnataka', cert: 'FSSAI', img: '/areca.jpg' },
+  { name: 'Kabuli Chickpeas', origin: 'Rajasthan', cert: 'APEDA' },
+  { name: 'Fresh Bananas', origin: 'Maharashtra', cert: 'Phyto' },
+  { name: 'Whole Leaf Tobacco', origin: 'Andhra Pradesh', cert: 'TB' },
+  { name: 'Areca Nuts', origin: 'Karnataka', cert: 'FSSAI' },
 ];
 
 export function IndexRoute() {
+  // Simple inline handler for the light effect
   const handleMouseMove = (e: any) => {
     const btn = e.currentTarget;
     const rect = btn.getBoundingClientRect();
@@ -29,7 +29,7 @@ export function IndexRoute() {
           <h1 className="hero-title text-gold-gradient">Global Trade, <br/>Rooted in Excellence</h1>
           <p className="hero-subtitle">Premium agricultural commodities exported from India to 40+ nations.</p>
           
-          <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', marginTop: '2rem' }}>
+          <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', marginTop: '2rem', flexWrap: 'wrap' }}>
             <a href="#products" className="btn-luxury" onMouseMove={handleMouseMove}>
               Explore Products
             </a>
@@ -49,7 +49,7 @@ export function IndexRoute() {
           {products.map((prod, idx) => (
             <div key={idx} className="card-premium reveal-up" style={{ transitionDelay: \\ms\ }}>
               <div style={{ height: '180px', background: '#f0f0f0', borderRadius: '1rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#888' }}>
-                Product Image
+                Image Placeholder
               </div>
               <h3 className="text-2xl mb-2">{prod.name}</h3>
               <p className="text-sm font-bold text-gold mb-1">Origin: {prod.origin}</p>

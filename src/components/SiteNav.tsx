@@ -1,4 +1,4 @@
-// src/components/SiteNav.tsx
+﻿// src/components/SiteNav.tsx
 import React, { useState, useEffect } from 'react';
 
 export const SiteNav = () => {
@@ -14,21 +14,20 @@ export const SiteNav = () => {
     <nav className={\
 avbar \\}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        {/* PRIORITY 1: LOGO LOADING */}
+        {/* LOGO: Using .jpeg */}
         <img 
-          src="/logo.png" 
+          src="/logo.jpeg" 
           alt="MFS Global Logo" 
           className="logo-img"
+          style={{ height: '50px', width: 'auto', objectFit: 'contain' }}
           onError={(e) => {
-            // Fallback if image missing: show text only
             e.currentTarget.style.display = 'none';
             const fallback = document.getElementById('logo-fallback');
             if(fallback) fallback.style.display = 'block';
           }}
         />
-        <span id="logo-fallback" className="logo-text" style={{ display: 'none' }}>MFS Global</span>
+        <span id="logo-fallback" className="logo-text" style={{ display: 'none', fontFamily: 'Playfair Display', fontSize: '1.5rem', fontWeight: '700', color: '#C4962A' }}>MFS Global</span>
         
-        {/* Mobile Menu Toggle (Placeholder) */}
         <button className="btn-luxury" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}>Menu</button>
       </div>
       
