@@ -15,10 +15,10 @@ function useScrollReveal() {
           }
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }
     );
 
-    const elements = document.querySelectorAll('.reveal-on-scroll');
+    const elements = document.querySelectorAll('.reveal-up');
     elements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
@@ -27,13 +27,11 @@ function useScrollReveal() {
 
 export function Root() {
   useScrollReveal();
-  const navigate = useNavigate();
-
   return (
     <html lang="en">
       <Head>
-        <Title>MFS Global Industries | Premium Agricultural Exports</Title>
-        <meta name="description" content="Leading agricultural exporter from India. Trusted in 40+ nations." />
+        <Title>MFS Global Industries | Premium Exports</Title>
+        <meta name="description" content="World-class agricultural exports from India." />
         <link rel="canonical" href="https://mfsglobalindustries.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -41,10 +39,13 @@ export function Root() {
       <body>
         <div className="min-h-screen flex flex-col bg-[#FAFAF7]">
           <SiteNav />
-          <main className="flex-grow">
+          <main className="flex-grow pt-20">
             <Outlet />
           </main>
-          <SiteFooter />
+          {/* Simple Footer Placeholder if SiteFooter is missing */}
+          <footer style={{ background: '#1B2B4B', color: 'white', padding: '3rem 2rem', textAlign: 'center' }}>
+            <p>&copy; 2026 MFS Global Industries. All rights reserved.</p>
+          </footer>
         </div>
         <Scripts />
       </body>
