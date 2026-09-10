@@ -1,4 +1,4 @@
-﻿import '@/styles.css';
+﻿import '../styles.css';
 import { createRootRoute, Outlet } from '@tanstack/react-router';
 import { useEffect } from 'react';
 import SiteNav from '@/components/SiteNav';
@@ -43,4 +43,5 @@ function RootLayout() {
 export const Route = createRootRoute({
   component: RootLayout,
 });
+
 
